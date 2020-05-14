@@ -20742,8 +20742,14 @@ Testing Labels Shape: (4213, 11)
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Performance-Metrics">Performance Metrics<a class="anchor-link" href="#Performance-Metrics">&#182;</a></h3><p>From plots in previous sessions, we can see that given data is imbalanced, the most popular offer has triple amount of samples comparing to the least popular one. This should be taken into consideration of metrics selection.</p>
-<p>As we are training a model to predict best offer for given customer, finding the best offer significantly outweights avoiding the worst offer. So, while accuracy and F1 score are both very useful, we can lean a bit more on accuracy.</p>
-<p>For starters, we will use <code>sklearn.metrics.classification_report</code>, later, we can still have some more exploration in metrics.</p>
+<h4 id="Precision-and-Recall">Precision and Recall<a class="anchor-link" href="#Precision-and-Recall">&#182;</a></h4><p><strong>Precision</strong>, or the positive predictive value, refers to the fraction of relevant instances among the total retrieved instances.</p>
+<p>${Precision}=\frac{true\ positive}{true\ positive + false\ negative}$</p>
+<p><strong>Recall</strong>, also known as sensitivity, refers to the fraction of relevant instances retrieved over the total amount of relevant instances.</p>
+<p>${Recall}=\frac{true\ positive}{true\ positive + false\ negative}$</p>
+<h4 id="F-Score">F-Score<a class="anchor-link" href="#F-Score">&#182;</a></h4><p><strong>F-Score</strong> is the harmonic mean of the precision and recall. When $\beta = 1$ an $F_1$ score reaches its best value at 1 (perfect precision and recall).</p>
+<p>$F_\beta = \frac {(1 + \beta^2) \cdot \mathrm{true\ positive} }{(1 + \beta^2) \cdot \mathrm{true\ positive} + \beta^2 \cdot \mathrm{false\ negative} + \mathrm{false\ positive}}$</p>
+<p>As we are training a model to predict best offer for given customer, finding the best offer significantly outweights avoiding the worst offer. So, while precision and F1 score are both very useful, we can lean a bit more on accuracy.</p>
+<p>For starters, we will use <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html"><code>sklearn.metrics.classification_report</code></a>, later, we can still have some more exploration in metrics.</p>
 <h3 id="Model-Building">Model Building<a class="anchor-link" href="#Model-Building">&#182;</a></h3><p>Here I chose to build a multi-output XGBoost model. The reason for multi-output classifier is the factor of 'no_offer' mentioned previously, in my opinion, adding it as another label rather than simply taking it as the 11th class makes more sense, as the manually assigned feature could be misleading for the model.</p>
 <p>As for classifier types, XGBoost and RandomForest are both used.</p>
 
